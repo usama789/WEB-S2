@@ -21,7 +21,7 @@ var express = require('express');
  });
  
  router.get("/delete/:id", async function (req, res, next) {
-   let product = await courseModel.findByIdAndDelete(req.params.id);
+   let course = await courseModel.findByIdAndDelete(req.params.id);
    res.redirect("/course");
    
  });
