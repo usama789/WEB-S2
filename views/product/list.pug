@@ -1,0 +1,25 @@
+extends ../layout
+block content 
+    .row
+        .col-sm-8
+            h1=title
+        .col-sm-4
+            a(href="/product/add", class="btn btn-success float-right") Add New Product
+    table.table
+        thead
+            tr
+                th Course Name
+                th Course id
+                th Course Duration(Hrs)
+                th Course Fee(USD)
+                th action
+        tbody
+             each productModel in products
+                tr
+                    td=productModel.cname
+                    td=productModel.cid
+                    td=productModel.cduration
+                    td=productModel.cfee
+                    td
+                        a(href="/product/delete/"+productModel._id, class="btn btn-danger") Delete
+                        a(href="/product/edit/"+productModel._id, class="btn btn-warning") Edit
