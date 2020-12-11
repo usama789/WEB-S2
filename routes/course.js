@@ -5,30 +5,30 @@ var express = require('express');
  router.get('/', async function(req, res, next) {
    let products=await courseModel.find();//products
    //console.log(products); 
-   res.render('product/list',{title:"Edureka's Course List",products});  
+   res.render('course/list',{title:"Edureka's Course List",products});  
     
  });
  
  
  router.get("/add", async function (req, res, next) {
-   res.render('product/add');
+   res.render('course/add');
  });
   
  router.post("/add", async function (req, res, next) {
    let product = new courseModel(req.body);
    await product.save();
-   res.redirect("/product");
+   res.redirect("/course");
  });
  
  router.get("/delete/:id", async function (req, res, next) {
    let product = await courseModel.findByIdAndDelete(req.params.id);
-   res.redirect("/product");
+   res.redirect("/course");
    
  });
  
  router.get("/edit/:id", async function (req, res, next) {
    let product = await courseModel.findById(req.params.id);
-   res.render("product/edit", { product });
+   res.render("course/edit", { product });
  });
  
  router.post("/edit/:id", async function (req, res, next) {
@@ -38,7 +38,7 @@ var express = require('express');
    product.cduration = req.body.duration;
    product.cfee = req.body.fee;
    await product.save();
-   res.redirect("/product");
+   res.redirect("/course");
  });
  module.exports = router;
  
