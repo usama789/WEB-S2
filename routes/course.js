@@ -3,9 +3,9 @@ var express = require('express');
  const courseModel=require("../models/schema");
  /* GET home page. */
  router.get('/', async function(req, res, next) {
-   let products=await courseModel.find();//products
-   //console.log(products); 
-   res.render('course/list',{title:"Edureka's Course List",products});  
+   let course=await courseModel.find();
+   
+   res.render('course/list',{title:"Edureka's Course List",course});  
     
  });
  
@@ -15,29 +15,29 @@ var express = require('express');
  });
   
  router.post("/add", async function (req, res, next) {
-   let product = new courseModel(req.body);
-   await product.save();
+   let course = new courseModel(req.body);
+   await course.save();
    res.redirect("/course");
  });
  
  router.get("/delete/:id", async function (req, res, next) {
-   let product = await courseModel.findByIdAndDelete(req.params.id);
+   let course = await courseModel.findByIdAndDelete(req.params.id);
    res.redirect("/course");
    
  });
  
  router.get("/edit/:id", async function (req, res, next) {
-   let product = await courseModel.findById(req.params.id);
-   res.render("course/edit", { product });
+   let course = await courseModel.findById(req.params.id);
+   res.render("course/edit", { course });
  });
  
  router.post("/edit/:id", async function (req, res, next) {
-   let product = await courseModel.findById(req.params.id);
-   product.cname = req.body.name;
-   product.cid = req.body.id;
-   product.cduration = req.body.duration;
-   product.cfee = req.body.fee;
-   await product.save();
+   let course = await courseModel.findById(req.params.id);
+   course.cname = req.body.name;
+   course.cid = req.body.id;
+   course.cduration = req.body.duration;
+   course.cfee = req.body.fee;
+   await course.save();
    res.redirect("/course");
  });
  module.exports = router;
